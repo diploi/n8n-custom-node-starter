@@ -25,9 +25,11 @@ build_n8n_node() {
 
     npm run build
 
-    cp -rf ./nodes ./n8n-server/.n8n/custom/nodes
+    mkdir -p ./n8n-server/.n8n/custom
 
-    cp -rf ./credentials ./n8n-server/.n8n/custom/credentials
+    cp -rf ./dist/nodes ./n8n-server/.n8n/custom
+
+    cp -rf ./dist/credentials ./n8n-server/.n8n/custom
 
     echo "Custom node built successfully!"
 }
