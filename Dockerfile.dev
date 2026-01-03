@@ -1,0 +1,21 @@
+FROM node:22-alpine
+
+ARG FOLDER=/app
+
+RUN npm install -g n8n
+
+COPY . /app
+
+RUN chmod +x /app/n8n-script.sh
+
+ENV N8N_USER_FOLDER=/app/n8n-server
+
+WORKDIR ${FOLDER}
+
+RUN npm install 
+
+EXPOSE 5678
+
+CMD [ "./n8n-script.sh" ]
+
+

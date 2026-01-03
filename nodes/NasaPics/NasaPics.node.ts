@@ -164,7 +164,7 @@ export class NasaPics implements INodeType {
     ],
     displayName: 'NASA Pics',
     name: 'nasaPics',
-    icon: 'file:nasapics.svg',
+    icon: 'file:nasapics.png',
     group: ['transform'],
     version: 1,
     subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
