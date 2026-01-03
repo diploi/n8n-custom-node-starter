@@ -6,7 +6,8 @@ RUN npm install -g n8n
 
 COPY . /app
 
-RUN chmod +x /app/n8n-script.sh
+RUN chmod +x /app/n8n-script.sh && \
+    chmod +x /app/restart-n8n.sh
 
 ENV N8N_USER_FOLDER=/app/n8n-server
 
@@ -16,6 +17,6 @@ RUN npm install
 
 EXPOSE 5678
 
-CMD [ "./n8n-script.sh" ]
+CMD [ "sh", "./n8n-script.sh" ]
 
 

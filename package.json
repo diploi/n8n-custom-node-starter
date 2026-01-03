@@ -14,7 +14,6 @@
 		"type": "git",
 		"url": "https://github.com/diploi/n8n-custom-node-starter"
 	},
-	"main": "index.js",
 	"scripts": {
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
@@ -38,7 +37,9 @@
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
+		"chokidar-cli": "^3.0.0",
 		"eslint": "9.32.0",
+		"nodemon": "^3.1.11",
 		"prettier": "3.6.2",
 		"release-it": "^19.0.4",
 		"typescript": "5.9.2"
