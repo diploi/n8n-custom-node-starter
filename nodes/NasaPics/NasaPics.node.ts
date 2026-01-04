@@ -1,6 +1,7 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class NasaPics implements INodeType {
+  usableAsTool = true;
   description: INodeTypeDescription = {
     // Basic node details will go here
     properties: [
@@ -15,7 +16,7 @@ export class NasaPics implements INodeType {
             value: 'astronomyPictureOfTheDay',
           },
           {
-            name: 'Mars Rover Photos',
+            name: 'Mars Rover Photo',
             value: 'marsRoverPhotos',
           },
         ],
@@ -38,7 +39,7 @@ export class NasaPics implements INodeType {
           {
             name: 'Get',
             value: 'get',
-            action: 'Get the APOD',
+            action: 'Get the astronomy picture of the day',
             description: 'Get the Astronomy Picture of the day',
             routing: {
               request: {
@@ -66,7 +67,7 @@ export class NasaPics implements INodeType {
           {
             name: 'Get',
             value: 'get',
-            action: 'Get Mars Rover photos',
+            action: 'Get mars rover photos',
             description: 'Get photos from the Mars Rover',
             routing: {
               request: {
@@ -78,7 +79,7 @@ export class NasaPics implements INodeType {
         default: 'get',
       },
       {
-        displayName: 'Rover name',
+        displayName: 'Rover Name',
         description: 'Choose which Mars Rover to get a photo from',
         required: true,
         name: 'roverName',
@@ -164,7 +165,7 @@ export class NasaPics implements INodeType {
     ],
     displayName: 'NASA Pics',
     name: 'nasaPics',
-    icon: 'file:nasapics.png',
+    icon: 'file:../../icons/diploinode.svg',
     group: ['transform'],
     version: 1,
     subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -176,7 +177,7 @@ export class NasaPics implements INodeType {
     outputs: ['main'],
     credentials: [
       {
-        name: 'NasaPicsApi',
+        name: 'nasaPicsApi',
         required: true,
       },
     ],
@@ -187,5 +188,6 @@ export class NasaPics implements INodeType {
         'Content-Type': 'application/json',
       },
     },
+    usableAsTool: true,
   };
 }

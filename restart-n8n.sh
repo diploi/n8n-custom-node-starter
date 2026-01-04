@@ -31,6 +31,8 @@ build_n8n_node() {
 
     cp -rf ./dist/credentials ./n8n-server/.n8n/custom
 
+    cp -rf ./dist/icons ~/.n8n/custom
+
     echo "Custom node built successfully!"
 }
 
