@@ -6,7 +6,7 @@ N8N_PID=""
 
 start_n8n() {
     echo "Starting n8n..."
-    n8n start &
+    npx n8n start &
     N8N_PID=$!
     echo "n8n started (PID $N8N_PID)"
 }
@@ -42,6 +42,9 @@ build_n8n_node
 
 # Start n8n server
 start_n8n
+
+# Wait for n8n process to finish (keeps script alive)
+wait
 
 # trap to ensure n8n is stopped on script exit
 trap "stop_n8n" EXIT
