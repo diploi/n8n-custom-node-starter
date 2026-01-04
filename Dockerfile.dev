@@ -2,16 +2,12 @@ FROM node:20-alpine
 
 ARG FOLDER=/app
 
+RUN apk add --update --no-cache python3 tini
+
 COPY . /app
 
-WORKDIR ${FOLDER}
-
-RUN apk add --update --no-cache python3 tini && \
+RUN chown -R 1000:1000 ${FOLDER} && \
     chmod +x $FOLDER/restart-n8n.sh
-
-RUN chown -R 1000:1000 ${FOLDER}
-
-ENV N8N_USER_FOLDER=${FOLDER}/n8n-server
 
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
@@ -20,6 +16,8 @@ ENV N8N_RUNNERS_ENABLED=true
 EXPOSE 5678
 
 USER 1000:1000
+
+WORKDIR ${FOLDER}
 
 ENTRYPOINT ["tini", "--"]
 
