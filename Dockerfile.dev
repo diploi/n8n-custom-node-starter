@@ -4,8 +4,10 @@ ARG FOLDER=/app
 
 COPY --chown=1000:1000 . /app
 
+WORKDIR ${FOLDER}
+
 RUN apk add --update --no-cache python3 tini && \
-    chmod +x $FOLDER/n8n-script.sh $FOLDER/restart-n8n.sh
+    chmod +x $FOLDER/restart-n8n.sh
 
 ENV N8N_USER_FOLDER=${FOLDER}/n8n-server
 
@@ -13,13 +15,10 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 ENV N8N_RUNNERS_ENABLED=true
 
-WORKDIR ${FOLDER}
-
 EXPOSE 5678
 
 USER 1000:1000
 
 ENTRYPOINT ["tini", "--"]
 
-CMD [ "sh", "./n8n-script.sh" ]
-
+CMD ["sh", "-c", "exec npx nodemon --signal SIGTERM --watch ./nodes/ --watch ./credentials/ --ext ts,js,json --exec 'sh ${FOLDER}/restart-n8n.sh'"]
