@@ -1,5 +1,5 @@
 
-FROM node:20-alpine
+FROM node:20-alpine AS base
 
 ARG N8N_VERSION=2.1.5
 
@@ -25,6 +25,8 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
     find  /usr/share/fonts/truetype/msttcorefonts/ -type l -exec unlink {} \; \
     && rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
 
+FROM base AS build
+
 ARG FOLDER=/app
 
 COPY --chown=1000:1000 . /app
@@ -37,6 +39,16 @@ USER 1000:1000
 RUN npm install && \
     npm run build && \
     chmod +x ./docker-entrypoint.sh
+
+FROM base AS production
+
+ARG FOLDER=/app
+
+WORKDIR ${FOLDER}
+
+COPY --from=build ${FOLDER}/dist ./dist
+
+COPY --from=build ${FOLDER}/docker-entrypoint.sh ./docker-entrypoint.sh
 
 # Copy custom files to ~/.n8n/custom/
 RUN mkdir -p ~/.n8n/custom && \
