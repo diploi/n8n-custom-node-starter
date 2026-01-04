@@ -7,7 +7,7 @@ COPY --chown=1000:1000 . /app
 RUN apk add --update --no-cache python3 tini && \
     chmod +x /app/n8n-script.sh /app/restart-n8n.sh
 
-ENV N8N_USER_FOLDER=/app/n8n-server
+ENV N8N_USER_FOLDER=${FOLDER}/n8n-server
 
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
