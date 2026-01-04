@@ -2,11 +2,10 @@ FROM node:20-alpine
 
 ARG FOLDER=/app
 
-COPY . /app
+COPY --chown=1000:1000 . /app
 
-RUN apk add --no-cache python3 py3-virtualenv && \
-    chmod +x /app/n8n-script.sh && \
-    chmod +x /app/restart-n8n.sh
+RUN apk add --update --no-cache python3 tini && \
+    chmod +x /app/n8n-script.sh /app/restart-n8n.sh
 
 ENV N8N_USER_FOLDER=/app/n8n-server
 
@@ -15,6 +14,10 @@ WORKDIR ${FOLDER}
 RUN npm install 
 
 EXPOSE 5678
+
+USER 1000:1000
+
+ENTRYPOINT ["tini", "--"]
 
 CMD [ "sh", "./n8n-script.sh" ]
 

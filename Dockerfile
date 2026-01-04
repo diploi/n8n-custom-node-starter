@@ -3,9 +3,9 @@ FROM node:20-alpine AS base
 
 ARG N8N_VERSION=2.1.5
 
-RUN apk add --update graphicsmagick tzdata git tini su-exec
-
 USER root
+
+RUN apk add --update graphicsmagick tzdata git tini su-exec
 
 RUN apk add --no-cache \
     python3 \
