@@ -5,7 +5,7 @@ ARG FOLDER=/app
 COPY --chown=1000:1000 . /app
 
 RUN apk add --update --no-cache python3 tini && \
-    chmod +x /app/n8n-script.sh /app/restart-n8n.sh
+    chmod +x $FOLDER/n8n-script.sh $FOLDER/restart-n8n.sh
 
 ENV N8N_USER_FOLDER=${FOLDER}/n8n-server
 

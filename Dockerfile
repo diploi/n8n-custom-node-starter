@@ -36,7 +36,7 @@ USER 1000:1000
 
 RUN npm install && \
     npm run build && \
-    chmod +x ./docker-entrypoint.sh
+    chmod +x $FOLDER/docker-entrypoint.sh
 
 
 # Production stage   
@@ -60,10 +60,8 @@ RUN mkdir -p ~/.n8n/custom && \
     cp -rf ./dist/credentials ~/.n8n/custom && \
     cp -rf ./dist/icons ~/.n8n/custom
 
-WORKDIR /data
+ENTRYPOINT ["tini", "--"]
 
-COPY --chmod=755 docker-entrypoint.sh /docker-entrypoint.sh
-
-ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+CMD [ "sh", "./docker-entrypoint.sh" ]
 
 EXPOSE 5678/tcp
