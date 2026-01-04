@@ -9,6 +9,10 @@ RUN apk add --update --no-cache python3 tini && \
 
 ENV N8N_USER_FOLDER=/app/n8n-server
 
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
+ENV N8N_RUNNERS_ENABLED=true
+
 WORKDIR ${FOLDER}
 
 RUN npm install 

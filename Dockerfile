@@ -46,6 +46,10 @@ ARG FOLDER=/app
 
 WORKDIR ${FOLDER}
 
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
+ENV N8N_RUNNERS_ENABLED=true
+
 COPY --from=build ${FOLDER}/dist ./dist
 
 COPY --from=build ${FOLDER}/docker-entrypoint.sh ./docker-entrypoint.sh
