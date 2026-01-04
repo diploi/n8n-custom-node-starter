@@ -50,7 +50,7 @@ connectionStrings:
 
 images:
   - identifier: app
-    prebuildImage: ghcr.io/diploi/component-n8n:[tag]
+    prebuildImage: ghcr.io/diploi/n8n-custom-node-starter:[tag]
 
 logs:
   - name: n8n Log
