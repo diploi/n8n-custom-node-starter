@@ -21,4 +21,4 @@ USER 1000:1000
 
 ENTRYPOINT ["tini", "--"]
 
-CMD ["sh", "-c", "exec npx nodemon --signal SIGTERM --watch ./nodes/ --watch ./credentials/ --ext ts,js,json --exec 'sh ${FOLDER}/restart-n8n.sh'"]
+CMD ["sh", "-c", "exec npx nodemon --signal SIGTERM --watch ./nodes/ --watch ./credentials/ --ext ts,js,json --exec 'sh ./restart-n8n.sh'"]
