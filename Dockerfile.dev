@@ -2,12 +2,14 @@ FROM node:20-alpine
 
 ARG FOLDER=/app
 
-COPY --chown=1000:1000 . /app
+COPY . /app
 
 WORKDIR ${FOLDER}
 
 RUN apk add --update --no-cache python3 tini && \
     chmod +x $FOLDER/restart-n8n.sh
+
+RUN chown -R 1000:1000 ${FOLDER}
 
 ENV N8N_USER_FOLDER=${FOLDER}/n8n-server
 

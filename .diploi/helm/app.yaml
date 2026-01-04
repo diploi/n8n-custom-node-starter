@@ -68,7 +68,7 @@ spec:
         - name: install-dependencies
           image: {{ .Values.images.app }}
           imagePullPolicy: Always
-          command: ['npm', 'install']
+          command: ['npm', 'ci']
           workingDir: /app/{{ .Values.identifier }}
           env:
           - name: N8N_ENV
