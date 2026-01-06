@@ -69,7 +69,7 @@ spec:
           image: {{ .Values.images.app }}
           imagePullPolicy: Always
           command: ['npm', 'install']
-          workingDir: /app/{{ .Values.identifier }}
+          workingDir: /app{{ .Values.folder }}
           env:
           - name: N8N_ENV
             value: development
@@ -84,7 +84,7 @@ spec:
           ports:
             - containerPort: 5678
           {{- if eq .Values.stage "development" }}
-          workingDir: /app/{{ .Values.identifier }}
+          workingDir: /app{{ .Values.folder }}
           {{- end }}
           env:
             {{- range .Values.env }}
@@ -99,7 +99,7 @@ spec:
               value: {{ .Values.stage }}
           {{- if eq .Values.stage "development" }}
             - name: N8N_USER_FOLDER
-              value: /app/{{ .Values.identifier }}/n8n-server
+              value: /app{{ .Values.folder }}/n8n-server
           {{- end }}
           volumeMounts:
             {{- if hasKey .Values.storage "code" }}
